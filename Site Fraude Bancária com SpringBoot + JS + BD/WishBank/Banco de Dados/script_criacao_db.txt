@@ -1,0 +1,29 @@
+CREATE DATABASE sistema_wishbank;
+USE sistema_wishbank;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE empresas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_fantasia VARCHAR(150) NOT NULL,
+    cnpj VARCHAR(30) NOT NULL,
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE denuncias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome_empresa VARCHAR(150) NOT NULL,
+    tipo_golpe VARCHAR(150) NOT NULL,
+    valor_perdido DECIMAL(10,2),
+    data_golpe DATE NOT NULL,
+    nome_vitima VARCHAR(150) NOT NULL,
+    email_vitima VARCHAR(150) NOT NULL
+);
